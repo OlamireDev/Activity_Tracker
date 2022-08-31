@@ -1,0 +1,46 @@
+body{
+    background-color: #865899;
+}
+
+.dForm{
+    border-radius: 10px;
+    margin :auto 200px auto 50px;
+    padding: 20px 40px 20px 40px;
+    width: 65%;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.status{
+    width: 100%;
+    text-align: right;
+}
+
+.title input{
+    min-width: 100%;
+    max-width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: #525252 1px solid;
+    font-size: 24px;
+}
+
+.title input:focus{
+    outline: none;
+}
+
+.description textarea{
+    min-width: 100%;
+    max-width: 100%;
+    height: 200px;
+    border: none;
+    border-bottom: #525252 1px solid;
+    font-size: 24px;
+}
+.update{
+    display: flex;
+    justify-content: space-between;
+}

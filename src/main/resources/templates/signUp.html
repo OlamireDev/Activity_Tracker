@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Check</title>
+</head>
+<body>
+    <div class ="topnav">
+        <img src ="" alt="company">
+        <a href="/home">Login</a>
+    </div>
+    <form action ="/user/registerU" th:object="${using}" method="post">
+        <div id ="lHeader"><h1>Welcome to ActivityPlus</h1>
+            <p>Sign Up for a new account</p>
+        </div>
+        <div id ="lBody">
+            <div>
+            <label for="firstname">Firstname: </label>
+            <input id="firstname" th:field ="*{firstname}" type ="text" placeholder="Enter your firstname">
+            </div>
+            <div>
+            <label for="lastname">Lastname: </label>
+            <input id="lastname" th:field ="*{lastname}" type ="text" placeholder="Enter your lastname">
+            </div>
+            <div>
+            <label for="email">Email: </label>
+            <input id="email" th:field = "*{email}" type ="email" placeholder="Enter your email">
+            </div>
+            <div>
+            <label for="password">Password: </label>
+            <input id="password" th:field = "*{password}" type ="password" placeholder="Enter your password">
+            </div>
+            <div>
+            <label for="passconfirm">Confirm Password: </label>
+            <input id="passconfirm" th:field = "*{passConfirm}" type ="password" placeholder="Confirm your password">
+            </div>
+            <div id="error" th:if="${error != null}">
+                <p th:text ="${error}"></p>
+            </div>
+            <button type="submit"> Sign Up</button>
+        </div>
+    </form>
+</body>
+</html>

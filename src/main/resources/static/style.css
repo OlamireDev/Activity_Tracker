@@ -1,0 +1,117 @@
+body{
+    background-color: #865899;
+}
+
+ul{
+    margin: 100px auto;
+    width: 800px;
+}
+
+ul li{
+    list-style: none;
+    width: 100%;
+    margin-bottom: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+ ul li label{
+     padding: 10px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     color: #865899;
+     cursor: pointer;
+ }
+
+ul li label span{
+
+    font-size: 22px;
+    color: #865899;
+
+}
+
+ul label + input[type ="radio"]{
+    display: none;
+}
+
+ul .items{
+    padding: 20px 20px 10px 20px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    display: none;
+    transition: max-height 0.5s ease-in-out;
+}
+
+ul label + input[type ="radio"]:checked + .items{
+    max-height: none;
+    display: initial;
+}
+
+.layout{
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+ #title{
+     width: 65%;
+ }
+
+ #tag{
+     min-width: 100%;
+     max-width: 100%;
+     background-color: white;
+     overflow: hidden;
+     padding: 10px;
+     font-size: 25px;
+     border: none;
+     border-bottom: #525252 2px solid;
+     height: 40px;
+     text-align: left;
+     display: block;
+     text-overflow: ellipsis;
+ }
+#check {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 15%;
+    height: 40px;
+
+}
+ #del{
+     display: flex;
+     align-content: center;
+     justify-content: center;
+     height: 40px;
+     width: 15%;
+ }
+
+#del button{
+    background-color: #865899;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    height: auto;
+    width: 50%;
+}
+
+input[type=checkbox]
+{
+    transform: scale(2);
+    padding: 10px;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext
+{
+    /* Checkbox text */
+    font-size: 110%;
+    display: inline;
+}
