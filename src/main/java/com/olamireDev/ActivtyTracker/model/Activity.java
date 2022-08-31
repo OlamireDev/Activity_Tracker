@@ -1,6 +1,7 @@
 package com.olamireDev.ActivtyTracker.model;
 
 import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -69,4 +70,15 @@ public class Activity {
             this.status = status;
         }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Activity activity)) return false;
+        return getActivityId() == activity.getActivityId() && getUserId() == activity.getUserId() && Objects.equals(getTitle(), activity.getTitle()) && Objects.equals(getDescription(), activity.getDescription()) && getStatus() == activity.getStatus() && Objects.equals(getCreatedAt(), activity.getCreatedAt()) && Objects.equals(getUpdatedAt(), activity.getUpdatedAt()) && Objects.equals(getCompletedAt(), activity.getCompletedAt());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getActivityId(), getUserId(), getTitle(), getDescription(), getStatus(), getCreatedAt(), getUpdatedAt(), getCompletedAt());
+    }
 }

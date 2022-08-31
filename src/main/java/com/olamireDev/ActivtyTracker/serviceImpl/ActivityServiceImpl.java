@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActivityServiceImpl extends ActivityService {
@@ -20,9 +21,8 @@ public class ActivityServiceImpl extends ActivityService {
     }
 
     @Override
-    public List<ActivityDTO> getActivity(Long id) {
+    public List<ActivityDTO> getActivities(Long id) {
         List<Activity> list = activityRepository.findAllByUserId(id);
-        System.out.println(list);
         List<ActivityDTO> ret =new ArrayList<>();
         for(Activity act: list){
             ret.add(new ActivityDTO(act.getActivityId(), act.getTitle(), act.getDescription(), act.getStatus()));
@@ -33,5 +33,10 @@ public class ActivityServiceImpl extends ActivityService {
     @Override
     public void Save(Activity activity) {
         activityRepository.save(activity);
+    }
+
+    @Override
+    public Activity getActivity(Long id) {
+        return activityRepository.findByActivityId(id).orElse(null);
     }
 }

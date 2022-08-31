@@ -40,13 +40,14 @@ ul .items{
     line-height: 26px;
     max-height: 0;
     overflow: hidden;
-    display: none;
     transition: max-height 0.5s ease-in-out;
+    display: none;
 }
 
 ul label + input[type ="radio"]:checked + .items{
     max-height: none;
     display: initial;
+    transition: max-height 0.5s;
 }
 
 .layout{

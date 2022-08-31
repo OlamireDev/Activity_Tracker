@@ -8,6 +8,7 @@ import com.olamireDev.ActivtyTracker.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public abstract class ActivityService {
@@ -19,10 +20,14 @@ public abstract class ActivityService {
         this.activityRepository = activityRepository;
     }
 
-    public List<ActivityDTO> getActivity(Long id){
+    public List<ActivityDTO> getActivities(Long id){
         return null;
     }
 
     public void Save(Activity activity){}
+
+    public Activity getActivity(Long id){
+        return null;
+    }
     
 }
