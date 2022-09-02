@@ -1,5 +1,7 @@
 package com.olamireDev.ActivtyTracker.serviceImpl;
 
+import com.olamireDev.ActivtyTracker.exceptions.EmailInUseException;
+import com.olamireDev.ActivtyTracker.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +19,22 @@ public class UserServiceImpl extends UserService {
     }
     
     @Override
-    public UserDTO getUser(String email, String password){
-        User returnedUser = userRepository.findByEmailAndPassword(email, password).orElse(null);
-        if(returnedUser != null){
-            return new UserDTO(returnedUser.getUserId(), returnedUser.getFirstname());
-        }
-        return null;
+    public UserDTO getUser(String email, String password, String where){
+        User returnedUser = userRepository.findByEmailAndPassword(email, password).orElseThrow(() ->
+                new UserNotFoundException("user with provided cridentials not found", where));
+        return new UserDTO(returnedUser.getUserId(), returnedUser.getFirstname());
     }
 
     @Override
-    public Long validEmail(String email){
-        return userRepository.countByEmail(email);
+    public void validEmail(String email){
+        if(userRepository.countByEmail(email) > 0){
+            throw new EmailInUseException();
+        }
     }
 
-    public UserDTO addUser(User user){
+    public UserDTO addUser(User user, String where){
         userRepository.save(user);
-        return getUser(user.getEmail(), user.getPassword());
+        return getUser(user.getEmail(), user.getPassword(), where);
     }
 
 }

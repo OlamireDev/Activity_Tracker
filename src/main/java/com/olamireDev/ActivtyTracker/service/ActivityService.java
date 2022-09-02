@@ -8,7 +8,6 @@ import com.olamireDev.ActivtyTracker.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public abstract class ActivityService {
@@ -29,5 +28,7 @@ public abstract class ActivityService {
     public Activity getActivity(Long id){
         return null;
     }
+
+    public void deleteActivity(Long id){}
     
 }

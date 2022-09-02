@@ -14,15 +14,13 @@ public abstract class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO getUser(String email, String pass){
+    public UserDTO getUser(String email, String pass, String where){
         return null;
     }
 
-    public Long validEmail(String email){
-        return 0L;
-    }
+    public void validEmail(String email){}
 
-    public UserDTO addUser(User user){
+    public UserDTO addUser(User user, String where){
         return null;
     }
 

@@ -21,7 +21,6 @@ import java.util.List;
 public class HomeController {
 
     private final ActivityServiceImpl activityService;
-    private final Date jDate =new Date();
 
     @Autowired
     public HomeController(ActivityServiceImpl activityService){
@@ -44,15 +43,34 @@ public class HomeController {
         List<Activity> list = (List<Activity>) session.getAttribute("activity");
         for(Activity a: list){
             if(a.getActivityId() == Id){
-                ActivityDTO newer = new ActivityDTO();
+                ActivityDTO newer = new ActivityDTO(a.getUserId(), a.getTitle(), a.getDescription(), a.getStatus());
                 newer.setActivityId(a.getActivityId());
+                System.out.println(newer.getActivityId());
                 m.addAttribute("dto", newer);
-                m.addAttribute("act", a);
-                System.out.println(a.getActivityId());
                 break;
             }
         }
         return "activity-page";
+    }
+
+    @PostMapping("/new")
+    String newActivity(Model m){
+        m.addAttribute("dto", new ActivityDTO());
+        return "addActivity";
+    }
+
+    @PostMapping("/add")
+    String addActivity(@ModelAttribute("dto") ActivityDTO activityDTO, HttpSession session){
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        System.out.println(userDTO.getUserId());
+        Activity activity = new Activity();
+        activity.setUserId(userDTO.getUserId());
+        activity.setTitle(activityDTO.getTitle());
+        activity.setDescription(activityDTO.getDescription());
+        activity.setStatus(activityDTO.getStatus());
+        System.out.println(activity.getUserId());
+        activityService.Save(activity);
+        return "redirect:/home";
     }
 
     @PostMapping("/done")
@@ -69,24 +87,25 @@ public class HomeController {
 
     @PostMapping("/update")
     public String updateAct(@ModelAttribute("dto") ActivityDTO activityDTO){
-        System.out.println(activityDTO.getStatus() +"   " +activityDTO.getActivityId());
+        System.out.println(activityDTO.getActivityId());
         Activity activity = activityService.getActivity(activityDTO.getActivityId());
-        Activity compare = activity;
-        System.out.println(activityDTO.getStatus() +"   " +activity.getStatus());
         if(activityDTO.getTitle().length() > 0) {
             activity.setTitle(activityDTO.getTitle());
         }
         if(activityDTO.getDescription().length() > 0) {
             activity.setDescription(activityDTO.getDescription());
         }
-        if(!activityDTO.getStatus().equals(activity.getStatus())) {
-            activity.setStatus(activityDTO.getStatus());
-        }
-        if(compare != activity){
-        activity.setUpdatedAt(new java.sql.Date(jDate.getTime()));
+        activity.setStatus(activityDTO.getStatus());
+        System.out.println(activity.getStatus());
         activityService.Save(activity);
-        }
         return "redirect:/home";
+    }
+
+    @PostMapping ("/delete")
+    public String deleteAct(@RequestParam("id") String id){
+        Long actId = Long.valueOf(id);
+        activityService.deleteActivity(actId);
+        return"redirect:/home";
     }
     
 }

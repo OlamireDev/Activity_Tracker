@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity(name = "activity")
 @Data
@@ -34,9 +36,11 @@ public class Activity {
     private Status status;
 
     @Column(name ="created")
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated")
+    @UpdateTimestamp
     private Date updatedAt;
 
     @Column(name = "completed")

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Activity</title>
+  <link rel ="stylesheet" href = "aStyle.css">
+</head>
+<body>
+<div><a href="/home"><img src="" width="100px" height="100px" alt="">Home</a></div>
+<form class ="dForm" th:object="${dto}" action="/add" method="post">
+  <div class="title">
+    <input id ="title" th:field="*{title}" type="text" placeholder="What do you want to do?" required>
+  </div>
+  <div class="description">
+    <textarea id ="description" th:field="*{description}" placeholder ="Give me the details" required></textarea>
+  </div>
+  <input type="text" value="what can i put in here">
+  <div class ="update">
+    <select id ="status" th:field="*{status}" >
+      <option value="INPROGRESS">In Progress</option>
+      <option value="PENDING">Pending</option>
+    </select>
+    <button>Update</button>
+  </div>
+</form>
+</body>
+</html>

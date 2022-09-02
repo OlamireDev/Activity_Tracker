@@ -1,6 +1,7 @@
 package com.olamireDev.ActivtyTracker.serviceImpl;
 
 import com.olamireDev.ActivtyTracker.DTO.ActivityDTO;
+import com.olamireDev.ActivtyTracker.exceptions.ActivityNotFoundException;
 import com.olamireDev.ActivtyTracker.model.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ActivityServiceImpl extends ActivityService {
@@ -30,6 +30,10 @@ public class ActivityServiceImpl extends ActivityService {
         return ret;
     }
 
+    public void deleteActivity(Long id){
+        activityRepository.deleteById(id);
+    }
+
     @Override
     public void Save(Activity activity) {
         activityRepository.save(activity);
@@ -37,6 +41,6 @@ public class ActivityServiceImpl extends ActivityService {
 
     @Override
     public Activity getActivity(Long id) {
-        return activityRepository.findByActivityId(id).orElse(null);
+        return activityRepository.findByActivityId(id).orElseThrow(() -> new ActivityNotFoundException("Activity with id = "+id+" not found"));
     }
 }

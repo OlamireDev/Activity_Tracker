@@ -9,22 +9,21 @@
 <div><a href="/home"><img src="" width="100px" height="100px" alt="">Home</a></div>
 <form class ="dForm" th:object="${dto}" action="/update" method="post">
 	<div class="title">
-		<input id ="title" th:field="*{title}" type="text" th:placeholder="${act.getTitle()}" >
+		<input  th:field="*{title}" type="text"  >
 	</div>
 	<div class ="status">
-		<p th:text ="${act.getStatus()}">Placeholder things</p>
+		<p th:text ="${dto.getStatus()}">Placeholder things</p>
 	</div>
 	<div class="description">
-		<textarea id ="description" th:field="*{description}" th:placeholder ="${act.getDescription()}" ></textarea>
+		<textarea  th:field="*{description}"  ></textarea>
 	</div>
 	<div class ="update">
-	<select id ="status" th:field="*{status}" th:if ="${act.getStatus().toString() != 'DONE'}">
+	<select  th:field="*{status}" th:if ="${dto.getStatus().toString() != 'DONE'}">
 		<option value="INPROGRESS">In Progress</option>
 		<option value="PENDING">Pending</option>
 	</select>
-	<input name ="activityId" hidden th:value="${act.getActivityId()}">
-	<input  th:value="${act.getActivityId()}" th:field = "*{activityId}"  hidden>
-	<button th:disabled ="${act.getStatus().toString() == 'DONE'}">Update</button>
+		<input th:field="*{activityId}"  type="text" hidden>
+	<button th:disabled ="${dto.getStatus().toString() == 'DONE'}">Update</button>
 	</div>
 </form>
 </body>
