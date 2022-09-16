@@ -1,6 +1,7 @@
 package com.olamireDev.ActivtyTracker.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -37,13 +38,16 @@ public class Activity {
 
     @Column(name ="created")
     @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @Column(name = "updated")
     @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
     @Column(name = "completed")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date completedAt;
 
     public Activity(long activityId, long userId, String title, String description, Status status, Date createdAt,

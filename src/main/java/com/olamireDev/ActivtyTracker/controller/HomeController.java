@@ -5,6 +5,8 @@ import com.olamireDev.ActivtyTracker.DTO.UserDTO;
 import com.olamireDev.ActivtyTracker.enums.Status;
 import com.olamireDev.ActivtyTracker.model.Activity;
 import com.olamireDev.ActivtyTracker.serviceImpl.ActivityServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+
+    Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     private final ActivityServiceImpl activityService;
 
@@ -80,7 +84,7 @@ public class HomeController {
         Activity activity = activityService.getActivity(Id);
         activity.setActivityId(Id);
         activity.setStatus(Status.DONE);
-        activity.setCompletedAt(new java.sql.Date(jDate.getTime()));
+        activity.setCompletedAt(new Date());
         activityService.Save(activity);
         return "redirect:/home";
     }
